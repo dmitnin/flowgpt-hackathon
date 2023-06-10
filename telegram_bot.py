@@ -37,12 +37,12 @@ ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_DIR)
 
 # load index
 ll_index = load_index_from_storage(ll_storage_context)
+ll_query_engine = ll_index.as_query_engine()
 
 
 async def get_chatgpt_response(prompt):
 
-    query_engine = ll_index.as_query_engine()
-    response = query_engine.query(prompt)
+    response = ll_query_engine.query(prompt)
 
     return response.response
 

@@ -8,21 +8,22 @@ import os
 import openai
 
 
+LLAMA_INDEX_DIR = "./llama_index"
+
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
 openai.api_key = OPENAI_API_KEY;
 
+# rebuild storage context
+ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_DIR)
+
+# load index
+ll_index = load_index_from_storage(ll_storage_context)
+ll_query_engine = ll_index.as_query_engine()
+
 
 def chatbot(input_text):
-
-    # rebuild storage context
-    storage_context = StorageContext.from_defaults(persist_dir=".")
-
-    # load index
-    index = load_index_from_storage(storage_context)
-
-    query_engine = index.as_query_engine()
-    response = query_engine.query(input_text)
+    response = ll_query_engine.query(input_text)
 
     return response.response
 

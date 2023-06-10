@@ -2,7 +2,8 @@
 # pylint: disable=unused-argument, wrong-import-position
 # This program is dedicated to the public domain under the CC0 license.
 
-from llama_index import StorageContext, load_index_from_storage
+from llama_index import VectorStoreIndex, ListIndex, StorageContext, load_index_from_storage
+from llama_index.indices.composability import ComposableGraph
 from langchain.chat_models import ChatOpenAI
 import logging
 import os
@@ -25,23 +26,36 @@ if __version_info__ < (20, 0, 0, "alpha", 1):
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-LLAMA_INDEX_DIR = "./llama_index"
+SCRIPT_DIR = os.path.realpath(os.path.dirname(__file__))
+
+LLAMA_INDEX_ROOT_DIR = SCRIPT_DIR + "/llama_index"
 
 TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
 openai.api_key = OPENAI_API_KEY;
 
-# rebuild storage context
-ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_DIR)
 
-# load index
-ll_index = load_index_from_storage(ll_storage_context)
-ll_query_engine = ll_index.as_query_engine()
+llama_index_subdirs = []
+for entry in os.walk(LLAMA_INDEX_ROOT_DIR):
+    if "index_store.json" in entry[2]:
+        llama_index_subdirs.append(entry[0])
+
+print("Using Llama Indices from:")
+for subdir in llama_index_subdirs:
+    print("  - " + subdir)
+
+ll_indices = []
+for subdir in llama_index_subdirs:
+    ll_storage_context = StorageContext.from_defaults(persist_dir=subdir)
+    ll_index = load_index_from_storage(ll_storage_context)
+    ll_indices.append(ll_index)
+
+ll_graph = ComposableGraph.from_indices(ListIndex, ll_indices, index_summaries=[""] * len(ll_indices))
+ll_query_engine = ll_graph.as_query_engine()
 
 
 async def get_chatgpt_response(prompt):
-
     response = ll_query_engine.query(prompt)
 
     return response.response

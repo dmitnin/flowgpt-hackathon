@@ -4,7 +4,6 @@
 
 from llama_index import StorageContext, load_index_from_storage
 from langchain.chat_models import ChatOpenAI
-import gradio
 import logging
 import os
 import openai

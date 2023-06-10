@@ -29,6 +29,6 @@ def chatbot(input_text):
 iface = gradio.Interface(fn=chatbot,
                          inputs=gradio.components.Textbox(lines=7, label="Enter your text"),
                          outputs="text",
-                         title="Custom-trained AI Chatbot")
+                         title="FlowGPT Hackathon")
 
 iface.launch(share=True)

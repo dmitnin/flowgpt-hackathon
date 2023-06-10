@@ -28,7 +28,7 @@ def construct_index(directory_path):
 
     llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo", max_tokens=num_output))
 
-    documents = SimpleDirectoryReader(directory_path).load_data()
+    documents = SimpleDirectoryReader(input_dir=directory_path, recursive=True).load_data()
 
     index = GPTVectorStoreIndex.from_documents(documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 

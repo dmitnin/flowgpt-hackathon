@@ -4,7 +4,6 @@ from llama_index import VectorStoreIndex, ListIndex, StorageContext, load_index_
 from llama_index.indices.composability import ComposableGraph
 from langchain.chat_models import ChatOpenAI
 import gradio
-import sys
 import os
 import openai
 
@@ -20,7 +19,7 @@ for entry in os.walk(LLAMA_INDEX_ROOT_DIR):
 
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
-openai.api_key = OPENAI_API_KEY;
+openai.api_key = OPENAI_API_KEY
 
 # ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_ROOT_DIR)
 # ll_index = load_index_from_storage(ll_storage_context)

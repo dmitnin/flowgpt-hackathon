@@ -1,0 +1,8 @@
+beautifulsoup4
+gradio
+langchain
+llama_index
+openai
+Requests
+pypdf
+python-telegram-bot

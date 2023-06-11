@@ -23,7 +23,7 @@ openai.api_key = OPENAI_API_KEY
 
 def build_llama_query_engine():
     if len(llama_index_subdirs) == 1:
-        ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_ROOT_DIR)
+        ll_storage_context = StorageContext.from_defaults(persist_dir=llama_index_subdirs[0])
         ll_index = load_index_from_storage(ll_storage_context)
         return ll_index.as_query_engine()
     else:

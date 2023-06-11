@@ -45,14 +45,22 @@ print("Using Llama Indices from:")
 for subdir in llama_index_subdirs:
     print("  - " + subdir)
 
-ll_indices = []
-for subdir in llama_index_subdirs:
-    ll_storage_context = StorageContext.from_defaults(persist_dir=subdir)
-    ll_index = load_index_from_storage(ll_storage_context)
-    ll_indices.append(ll_index)
+def build_llama_query_engine():
+    if len(llama_index_subdirs) == 1:
+        ll_storage_context = StorageContext.from_defaults(persist_dir=LLAMA_INDEX_ROOT_DIR)
+        ll_index = load_index_from_storage(ll_storage_context)
+        return ll_index.as_query_engine()
+    else:
+        ll_indices = []
+        for subdir in llama_index_subdirs:
+            ll_storage_context = StorageContext.from_defaults(persist_dir=subdir)
+            ll_index = load_index_from_storage(ll_storage_context)
+            ll_indices.append(ll_index)
 
-ll_graph = ComposableGraph.from_indices(ListIndex, ll_indices, index_summaries=[""] * len(ll_indices))
-ll_query_engine = ll_graph.as_query_engine()
+        ll_graph = ComposableGraph.from_indices(ListIndex, ll_indices, index_summaries=[""] * len(ll_indices))
+        return ll_graph.as_query_engine()
+
+ll_query_engine = build_llama_query_engine()
 
 
 async def get_chatgpt_response(prompt):

@@ -7,3 +7,11 @@
 ### References
 * https://gpt-index.readthedocs.io/en/latest/
 * https://www.mikulskibartosz.name/llama-index-which-index-should-you-use/
+
+
+
+URL: https://diablo4.wiki.fextralife.com/Diablo+4+Wiki
+Site Snapshot Raw Size: 404.9 Mb
+Site Snapshot Stripped Size: 34.9 Mb
+Llama Index size: 519.8 Mb
+OpenAI Cost: $5.55

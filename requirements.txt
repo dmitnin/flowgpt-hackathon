@@ -6,3 +6,4 @@ openai
 Requests
 pypdf
 python-telegram-bot
+feedparser

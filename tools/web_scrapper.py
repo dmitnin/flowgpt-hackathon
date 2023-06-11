@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import json
+from typing import Iterable
 
 import requests
 from bs4 import BeautifulSoup
 
 
-def extract_links_recursive(base_url, url, links):
+def extract_links_recursive(base_url, url, links, counter=0):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
 
@@ -28,12 +29,22 @@ def extract_links_recursive(base_url, url, links):
         if absolute_url.startswith(base_url) and _filter(absolute_url) and absolute_url not in links:
             links.append(absolute_url)
             print(absolute_url)
-            links = extract_links_recursive(base_url, absolute_url, links)
+
+            if "<|endoftext|>" in soup.get_text():
+                print("<|endoftext|> is on the page")
+                links.remove(absolute_url)
+
+            print("Recursive call:", counter)
+
+            with open('../docs/diablo4/links', 'a') as f:
+                f.write(absolute_url + '\n')
+
+            links = extract_links_recursive(base_url, absolute_url, links, counter+1)
 
     return links
 
 
-url = 'https://gpt-index.readthedocs.io/en/latest/'
+url = 'https://diablo4.wiki.fextralife.com/'
 links = extract_links_recursive(url, url, [])
 
 counts = dict()
@@ -41,5 +52,5 @@ for l in links:
     counts[l] = counts.get(l, 0) + 1
 
 print(links)
-with open('../docs/llama_index/links.json', 'w') as f:
+with open('../docs/diablo4/links.json', 'w') as f:
     json.dump(counts, f)

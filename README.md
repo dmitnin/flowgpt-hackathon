@@ -14,13 +14,13 @@ Solution implemented in following steps:
 * Instantiate Query Engine (which incorporates composed graph based on our data index)
 * Integrate Query Engine with Telegram Bot and/or Gradio Http
 
-<img src="diagram.png" width="300">
+<img src="diagram.png" width="300"/>
 
 Dependencies on openAI APIs:
 * embedded API (to build vector embedding)
 * chat API
 
-Solution stats (for Telegram Bot on Diablo 4 dataset)
+Solution stats
 
 * Test Dataset URL: https://diablo4.wiki.fextralife.com/Diablo+4+Wiki
 * Site Snapshot Raw Size: 404.9 Mb
@@ -28,14 +28,7 @@ Solution stats (for Telegram Bot on Diablo 4 dataset)
 * Llama Index size: 519.8 Mb
 * OpenAI Cost: $5.55
 
-<img src="telegram.jpeg" width="200">
-
-Solution example (for HTTP chatbot on llamaindex dataset)
-
-* Test Dataset URL: https://gpt-index.readthedocs.io/en/latest/
-* Site Snapshot Raw Size: 400 web pages
-* Llama Index size: 100 Mb
-* OpenAI Cost: <$1
+<img src="telegram.jpeg" width="200"/>
 
 ### Project Expansion and Upcoming Ideas
 

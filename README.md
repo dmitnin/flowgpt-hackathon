@@ -44,3 +44,8 @@ The most recent updates/news/etc in domain area are the most relevant and desire
 ### References
 * https://gpt-index.readthedocs.io/en/latest/
 * https://www.mikulskibartosz.name/llama-index-which-index-should-you-use/
+* https://www.flyps.io/blog/using-the-llamaindex-former-gptindex-with-chatgpt
+* https://beebom.com/how-train-ai-chatbot-custom-knowledge-base-chatgpt-api/
+* https://medium.com/artificialis/building-personal-assistant-with-llamaindex-and-gpt-3-5-934a9ba1fd89
+* https://medium.com/@sohaibshaheen/train-chatgpt-with-custom-data-and-create-your-own-chat-bot-using-macos-fb78c2f9646d
+* https://towardsdatascience.com/how-i-built-a-custom-gpt-based-chatbot-in-under-10-minutes-with-llamaindex-2102f0173420

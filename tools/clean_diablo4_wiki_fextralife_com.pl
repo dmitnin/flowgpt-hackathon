@@ -10,6 +10,8 @@ use Mojo::DOM;
 use constant SCRIPT_DIR_PATH => $FindBin::Bin;
 use constant DIRECTORY_PATH => SCRIPT_DIR_PATH . '/tmp/diablo4.wiki.fextralife.com';
 
+# wget --recursive --no-parent https://diablo4.wiki.fextralife.com/Diablo+4+Wiki
+
 my $html_file_count          = 0;
 my $html_file_old_total_size = 0;
 my $html_file_new_total_size = 0;
